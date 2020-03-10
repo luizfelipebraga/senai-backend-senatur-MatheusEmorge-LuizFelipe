@@ -1,0 +1,3 @@
+Scaffold-DbContext "Data Source=N-1S-DEV-10\SQLEXPRESS; Initial Catalog=Senatur_Tarde; Integrated
+Security=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Domains
+-ContextDir Contexts -Context BlogContext
