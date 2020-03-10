@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Senai.Senatur.WebApi.Interfaces
+namespace Senai.Senatur.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PacotesController : ControllerBase
+    public class UsuariosController : ControllerBase
     {
     }
 }
