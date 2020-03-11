@@ -10,6 +10,7 @@ using Senai.Senatur.WebApi.Repositories;
 
 namespace Senai.Senatur.WebApi.Controllers
 {
+    [Produces("aplication/api")]
     [Route("api/[controller]")]
     [ApiController]
     public class UsuariosController : ControllerBase
