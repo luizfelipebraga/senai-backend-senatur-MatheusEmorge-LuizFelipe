@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Senai.Senatur.WebApi.Repositories
 {
-    public class PacotesRepository : IPacoteRepository
+    public class PacoteRepository : IPacoteRepository
     {
         SenaturContext ctx = new SenaturContext();
 
