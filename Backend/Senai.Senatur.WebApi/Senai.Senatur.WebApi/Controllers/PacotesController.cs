@@ -124,5 +124,32 @@ namespace Senai.Senatur.WebApi.Controllers
             }
             return NotFound($"O pacote não foi encontrado");
         }
+
+
+        /// <summary>
+        /// Deleta um pacote
+        /// </summary>
+        /// <param name="ativo">Seleciona se vai buscar por ativos ou não usando 'true' ou 'false'.</param>
+        /// <returns>Retorna os pacotes que estão de acordo com o filtro.</returns>
+        /// dominio/api/Pacotes/1
+        /// 
+        [HttpGet("Ativos={ativo}")]
+        public List<Pacotes> GetPorAtivos(bool ativo)
+        {
+            return pacoteRepository.BuscarPorAtivo(ativo);
+        }
+
+        /// <summary>
+        /// Deleta um pacote
+        /// </summary>
+        /// <param name="cidade">Busca por uma cidade especificada no filtro.</param>
+        /// <returns>Retorna os pacotes que estão de acordo com o filtro da cidade.</returns>
+        /// dominio/api/Pacotes/1
+        /// 
+        [HttpGet("Cidade={cidade}")]
+        public List<Pacotes> GetPorCidade(string cidade)
+        {
+            return pacoteRepository.BuscarPorCidade(cidade);
+        }
     }
 }

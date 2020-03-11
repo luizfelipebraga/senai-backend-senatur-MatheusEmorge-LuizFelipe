@@ -13,5 +13,7 @@ namespace Senai.Senatur.WebApi.Interfaces
         void Cadastrar(Pacotes novoPacote);
         void Atualizar(int id, Pacotes pacoteAtualizado);
         void Deletar(int id);
+        List<Pacotes> BuscarPorAtivo(bool ativo);
+        List<Pacotes> BuscarPorCidade(string cidade);
     }
 }

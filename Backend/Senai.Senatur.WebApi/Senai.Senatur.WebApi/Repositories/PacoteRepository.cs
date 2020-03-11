@@ -53,5 +53,15 @@ namespace Senai.Senatur.WebApi.Repositories
             ctx.SaveChanges();
         }
 
+        public List<Pacotes> BuscarPorAtivo(bool ativo)
+        {
+            // Recebe um true ou false, e passa como filtro para o Where()
+            return ctx.Pacotes.Where(e => e.Ativo == ativo).ToList();
+        }
+
+        public List<Pacotes> BuscarPorCidade(string cidade)
+        {
+            return ctx.Pacotes.Where(p => p.NomeCidade.Contains(cidade)).ToList();
+        }
     }
 }
