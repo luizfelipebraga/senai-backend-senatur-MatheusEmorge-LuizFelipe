@@ -71,7 +71,7 @@ namespace Senai.Senatur.WebApi.Controllers
             };
 
             // Define a chave de acesso ao token
-            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("senatur-chave-autenticacao"));
+            var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("Senatur-chave-autenticacao"));
 
             // Define as credenciais do token - Header
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

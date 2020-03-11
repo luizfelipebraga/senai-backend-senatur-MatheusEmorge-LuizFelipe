@@ -22,7 +22,7 @@ namespace Senai.Senatur.WebApi
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Senai.Senatur.WebApi", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Senatur", Version = "v1" });
                 // Set the comments path for the Swagger JSON and UI.
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
@@ -32,7 +32,10 @@ namespace Senai.Senatur.WebApi
             services
                 // Adiciona o MVC ao projeto
                 .AddMvc()
-
+                //Para não fazer loop
+                .AddJsonOptions(
+            options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+        )
                 // Define a versão do .NET Core
                 .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_1);
 
@@ -61,7 +64,7 @@ namespace Senai.Senatur.WebApi
                         ValidateLifetime = true,
 
                         // Forma de criptografia
-                        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("senatur-chave-autenticacao")),
+                        IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes("Senatur-chave-autenticacao")),
 
                         // Tempo de expiração do token
                         ClockSkew = TimeSpan.FromMinutes(30),
@@ -82,15 +85,18 @@ namespace Senai.Senatur.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
-            app.UseMvc();
             app.UseSwagger();
-            app.UseAuthentication();
+
 
             app.UseSwaggerUI(c => 
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Senai.Senatur.WebApi");
+                c.RoutePrefix = string.Empty;
             });
+
+            app.UseAuthentication();
+
+            app.UseMvc();
         }
     }
 }
