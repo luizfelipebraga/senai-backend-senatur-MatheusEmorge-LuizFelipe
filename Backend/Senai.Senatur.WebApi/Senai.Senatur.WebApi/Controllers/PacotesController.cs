@@ -11,5 +11,6 @@ namespace Senai.Senatur.WebApi.Controllers
     [ApiController]
     public class PacotesController : ControllerBase
     {
+
     }
 }

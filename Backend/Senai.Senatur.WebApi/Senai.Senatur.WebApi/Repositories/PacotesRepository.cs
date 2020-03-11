@@ -12,9 +12,46 @@ namespace Senai.Senatur.WebApi.Repositories
     {
         SenaturContext ctx = new SenaturContext();
 
+        public Pacotes BuscarPorId(int id)
+        {
+            return ctx.Pacotes.FirstOrDefault(p => p.IdPacote == id);
+        }
+
+        public void Atualizar(int id, Pacotes pacoteAtualizado)
+        {
+            var entity = BuscarPorId(id);
+
+            if(entity != null)
+            {
+                entity.Ativo = pacoteAtualizado.Ativo;
+                entity.DataIda = pacoteAtualizado.DataIda;
+                entity.DataVolta = pacoteAtualizado.DataVolta;
+                entity.Descricao = pacoteAtualizado.Descricao;
+                entity.NomeCidade = pacoteAtualizado.NomeCidade;
+                entity.NomePacote = pacoteAtualizado.NomePacote;
+                entity.Valor = pacoteAtualizado.Valor;
+            }
+
+            ctx.Pacotes.Update(pacoteAtualizado);
+            ctx.SaveChanges();
+        }
+
         public List<Pacotes> Listar()
         {
             return ctx.Pacotes.ToList();
         }
+
+        public void Cadastrar (Pacotes novoPacote)
+        {
+            ctx.Pacotes.Add(novoPacote);
+            ctx.SaveChanges();
+        }
+
+        public void Deletar(int id)
+        {
+            ctx.Pacotes.Remove(BuscarPorId(id));
+            ctx.SaveChanges();
+        }
+
     }
 }
