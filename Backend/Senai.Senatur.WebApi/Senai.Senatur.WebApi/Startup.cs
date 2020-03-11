@@ -19,6 +19,7 @@ namespace Senai.Senatur.WebApi
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Senai.Senatur.WebApi", Version = "v1" });
@@ -81,8 +82,15 @@ namespace Senai.Senatur.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
             app.UseMvc();
             app.UseSwagger();
+            app.UseAuthentication();
+
+            app.UseSwaggerUI(c => 
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
         }
     }
 }
