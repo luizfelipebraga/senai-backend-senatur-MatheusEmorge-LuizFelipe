@@ -36,10 +36,28 @@ namespace Senai.Senatur.WebApi.Repositories
             ctx.SaveChanges();
         }
 
+        /// <summary>
+        /// Lista todos os pacotes
+        /// </summary>
+        /// <returns>Retorna uma lista de pacotes e um status code 200 - Ok</returns>
+        /// dominio/api/Usuarios
         public List<Pacotes> Listar()
         {
             return ctx.Pacotes.ToList();
         }
+
+        public List <Pacotes> ListarOrdem(string ordem)
+        {
+            if (ordem == "ASC")
+            {
+
+                return ctx.Pacotes.OrderBy(p => p.Valor).ToList();
+            }
+            else {
+                return ctx.Pacotes.OrderByDescending(p => p.Valor).ToList();
+            }
+        }
+
 
         public void Cadastrar (Pacotes novoPacote)
         {
