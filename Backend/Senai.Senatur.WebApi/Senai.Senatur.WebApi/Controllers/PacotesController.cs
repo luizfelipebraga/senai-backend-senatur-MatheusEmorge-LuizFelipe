@@ -12,6 +12,7 @@ using Senai.Senatur.WebApi.Repositories;
 namespace Senai.Senatur.WebApi.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class PacotesController : ControllerBase
     {
