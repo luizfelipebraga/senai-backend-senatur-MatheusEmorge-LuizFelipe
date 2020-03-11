@@ -110,7 +110,9 @@ namespace Senai.Senatur.WebApi.Controllers
         /// <param name="id">ID do pacote que será deletado</param>
         /// <returns>Retorna um status code com uma mensagem de sucesso ou erro</returns>
         /// dominio/api/Pacotes/1
+        /// 
         [Authorize(Roles = "1")]    // Somente o tipo de usuário 1 (administrador) pode acessar o endpoint
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             Pacotes pacoteDeletado = pacoteRepository.BuscarPorId(id);
