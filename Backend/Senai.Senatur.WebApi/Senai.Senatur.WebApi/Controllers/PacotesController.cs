@@ -21,9 +21,26 @@ namespace Senai.Senatur.WebApi.Controllers
             pacoteRepository = new PacoteRepository();
         }
         /// <summary>
+        /// Lista todos os pacotes de ordem crescente ou decrescente
+        /// </summary>
+        /// <returns>Retorna uma lista de pacotes de ordem crescente ou decrescente um status code 200 - Ok</returns>
+        /// dominio/api/Pacotes
+        [Authorize(Roles = "1")]    // Somente o tipo de usuário 1 (administrador) pode acessar o endpoint
+        [HttpGet("Ordenacao/{ordem}")]
+        public IActionResult GetOrderBy(string ordem)
+        {
+            if(ordem != "ASC" && ordem != "DESC")
+            {
+                return BadRequest("Não foi possível ordenar da maneira solicitada. Por favor, ordene por 'ASC' ou 'DESC'");
+            }
+
+            return Ok(pacoteRepository.ListarOrdem(ordem));
+        }
+
+        /// <summary>
         /// Lista todos os pacotes
         /// </summary>
-        /// <returns>Retorna uma lista de usuários e um status code 200 - Ok</returns>
+        /// <returns>Retorna uma lista de pacotes um status code 200 - Ok</returns>
         /// dominio/api/Pacotes
         [Authorize(Roles = "1")]    // Somente o tipo de usuário 1 (administrador) pode acessar o endpoint
         [HttpGet]
@@ -31,6 +48,8 @@ namespace Senai.Senatur.WebApi.Controllers
         {
             return Ok(pacoteRepository.Listar());
         }
+
+
         /// <summary>
         /// Cadastra um novo pacote
         /// </summary>
@@ -120,7 +139,7 @@ namespace Senai.Senatur.WebApi.Controllers
             if (pacoteDeletado != null)
             {
                 pacoteRepository.Deletar(id);
-                return Ok($"O pacote{id} foi deletado");
+                return Ok($"O pacote {id} foi deletado");
             }
             return NotFound($"O pacote não foi encontrado");
         }
